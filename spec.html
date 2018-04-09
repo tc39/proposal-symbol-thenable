@@ -9,215 +9,250 @@ contributors: Gus Caplan
 <script src="ecmarkup.js" defer></script>
 <link rel="stylesheet" href="ecmarkup.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<style>
+  /* custom styles */
+  #metadata-block {
+    margin: 4em 0;
+    padding: 10px;
+    border: 1px solid #ee8421;
+  }
 
-    <!-- es6num="6.1.5" -->
-    <emu-clause id="sec-ecmascript-language-types-symbol-type">
-      <h1>The Symbol Type</h1>
-      <!-- es6num="6.1.5.1" -->
-      <emu-clause id="sec-well-known-symbols">
-        <h1>Well-Known Symbols</h1>
-        <p>Well-known symbols are built-in Symbol values that are explicitly referenced by algorithms of this specification. They are typically used as the keys of properties whose values serve as extension points of a specification algorithm. Unless otherwise specified, well-known symbols values are shared by all realms (<emu-xref href="#sec-code-realms"></emu-xref>).</p>
-        <p>Within this specification a well-known symbol is referred to by using a notation of the form @@name, where &ldquo;name&rdquo; is one of the values listed in <emu-xref href="#table-1"></emu-xref>.</p>
-        <emu-table id="table-1" caption="Well-known Symbols">
-          <table>
-            <tbody>
-            <tr>
-              <th>
-                Specification Name
-              </th>
-              <th>
-                [[Description]]
-              </th>
-              <th>
-                Value and Purpose
-              </th>
-            </tr>
-            <tr>
-              <td>
-                @@asyncIterator
-              </td>
-              <td>
-                `"Symbol.asyncIterator"`
-              </td>
-              <td>
-                A method that returns the default AsyncIterator for an object. Called by the semantics of the `for`-`await`-`of` statement.
-              </td>
-            </tr>
-            <tr>
-              <td>
-                @@hasInstance
-              </td>
-              <td>
-                `"Symbol.hasInstance"`
-              </td>
-              <td>
-                A method that determines if a constructor object recognizes an object as one of the constructor's instances. Called by the semantics of the `instanceof` operator.
-              </td>
-            </tr>
-            <tr>
-              <td>
-                @@isConcatSpreadable
-              </td>
-              <td>
-                `"Symbol.isConcatSpreadable"`
-              </td>
-              <td>
-                A Boolean valued property that if true indicates that an object should be flattened to its array elements by <emu-xref href="#sec-array.prototype.concat">`Array.prototype.concat`</emu-xref>.
-              </td>
-            </tr>
-            <tr>
-              <td>
-                @@iterator
-              </td>
-              <td>
-                `"Symbol.iterator"`
-              </td>
-              <td>
-                A method that returns the default Iterator for an object. Called by the semantics of the for-of statement.
-              </td>
-            </tr>
-            <tr>
-              <td>
-                @@match
-              </td>
-              <td>
-                `"Symbol.match"`
-              </td>
-              <td>
-                A regular expression method that matches the regular expression against a string. Called by the <emu-xref href="#sec-string.prototype.match">`String.prototype.match`</emu-xref> method.
-              </td>
-            </tr>
-            <tr>
-              <td>
-                @@replace
-              </td>
-              <td>
-                `"Symbol.replace"`
-              </td>
-              <td>
-                A regular expression method that replaces matched substrings of a string. Called by the <emu-xref href="#sec-string.prototype.replace">`String.prototype.replace`</emu-xref> method.
-              </td>
-            </tr>
-            <tr>
-              <td>
-                @@search
-              </td>
-              <td>
-                `"Symbol.search"`
-              </td>
-              <td>
-                A regular expression method that returns the index within a string that matches the regular expression. Called by the <emu-xref href="#sec-string.prototype.search">`String.prototype.search`</emu-xref> method.
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <ins>@@thenable</ins>
-              </td>
-              <td>
-                <ins>`"Symbol.thenable"`</ins>
-              </td>
-              <td>
-                <ins>A boolean valued property whose value controls whether the associated object will be considered "thenable."</ins>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                @@species
-              </td>
-              <td>
-                `"Symbol.species"`
-              </td>
-              <td>
-                A function valued property that is the constructor function that is used to create derived objects.
-              </td>
-            </tr>
-            <tr>
-              <td>
-                @@split
-              </td>
-              <td>
-                `"Symbol.split"`
-              </td>
-              <td>
-                A regular expression method that splits a string at the indices that match the regular expression. Called by the <emu-xref href="#sec-string.prototype.split">`String.prototype.split`</emu-xref> method.
-              </td>
-            </tr>
-            <tr>
-              <td>
-                @@toPrimitive
-              </td>
-              <td>
-                `"Symbol.toPrimitive"`
-              </td>
-              <td>
-                A method that converts an object to a corresponding primitive value. Called by the ToPrimitive abstract operation.
-              </td>
-            </tr>
-            <tr>
-              <td>
-                @@toStringTag
-              </td>
-              <td>
-                `"Symbol.toStringTag"`
-              </td>
-              <td>
-                A String valued property that is used in the creation of the default string description of an object. Accessed by the built-in method <emu-xref href="#sec-object.prototype.tostring">`Object.prototype.toString`</emu-xref>.
-              </td>
-            </tr>
-            <tr>
-              <td>
-                @@unscopables
-              </td>
-              <td>
-                `"Symbol.unscopables"`
-              </td>
-              <td>
-                An object valued property whose own and inherited property names are property names that are excluded from the `with` environment bindings of the associated object.
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        </emu-table>
-      </emu-clause>
-    </emu-clause>
+  #metadata-block h1 {
+    font-size: 1.5em;
+    margin-top: 0;
+  }
+  #metadata-block > ul {
+    list-style-type: none;
+    margin: 0; padding: 0;
+  }
+  #ecma-logo {
+    width: 500px;
+  }
+  .unicode-property-table {
+    table-layout: fixed;
+    width: 100%;
+    font-size: 80%;
+  }
+  .unicode-property-table ul {
+    padding-left: 0;
+    list-style: none;
+  }
+</style>
 
-    <!-- es6num="25.4.1" -->
-    <emu-clause id="sec-promise-abstract-operations">
-      <h1>Promise Abstract Operations</h1>
+<emu-intro id=sec-intro>
+  <h1>Introduction</h1>
+  <p>This proposal introduces a the well known symbol @@thenable, which is used to determine if an object passed through Promise.resolve should be treated as a thenable.</p>
+</emu-intro>
 
-      <!-- es6num="25.4.1.3.2" -->
-      <emu-clause id="sec-promise-resolve-functions">
-        <h1>Promise Resolve Functions</h1>
-        <p>A promise resolve function is an anonymous built-in function that has [[Promise]] and [[AlreadyResolved]] internal slots.</p>
-        <p>When a promise resolve function _F_ is called with argument _resolution_, the following steps are taken:</p>
-        <emu-alg>
-          1. Assert: _F_ has a [[Promise]] internal slot whose value is an Object.
-          1. Let _promise_ be _F_.[[Promise]].
-          1. Let _alreadyResolved_ be _F_.[[AlreadyResolved]].
-          1. If _alreadyResolved_.[[Value]] is *true*, return *undefined*.
-          1. Set _alreadyResolved_.[[Value]] to *true*.
-          1. If SameValue(_resolution_, _promise_) is *true*, then
-            1. Let _selfResolutionError_ be a newly created *TypeError* object.
-            1. Return RejectPromise(_promise_, _selfResolutionError_).
-          1. If Type(_resolution_) is not Object, then
-            1. Return FulfillPromise(_promise_, _resolution_).
-          1. <ins>Let _thenable_ be Get(_resolution_, @@thenable)</ins>
-          1. <ins>If _thenable_ is *false*, then</ins>
-            1. <ins>Return FulfillPromise(_promise_, _resolution_).</ins>
-          1. Let _then_ be Get(_resolution_, `"then"`).
-          1. If _then_ is an abrupt completion, then
-            1. Return RejectPromise(_promise_, _then_.[[Value]]).
-          1. Let _thenAction_ be _then_.[[Value]].
-          1. If IsCallable(_thenAction_) is *false*, then
-            1. Return FulfillPromise(_promise_, _resolution_).
-          1. Perform EnqueueJob(`"PromiseJobs"`, PromiseResolveThenableJob, &laquo; _promise_, _resolution_, _thenAction_ &raquo;).
-          1. Return *undefined*.
-        </emu-alg>
-        <p>The `length` property of a promise resolve function is 1.</p>
-      </emu-clause>
-   </emu-clause>
+<emu-clause id="sec-ecmascript-language-types-symbol-type">
+  <h1>The Symbol Type</h1>
+  <!-- es6num="6.1.5.1" -->
+  <emu-clause id="sec-well-known-symbols">
+    <h1>Well-Known Symbols</h1>
+    <p>Well-known symbols are built-in Symbol values that are explicitly referenced by algorithms of this specification. They are typically used as the keys of properties whose values serve as extension points of a specification algorithm. Unless otherwise specified, well-known symbols values are shared by all realms (<emu-xref href="#sec-code-realms"></emu-xref>).</p>
+    <p>Within this specification a well-known symbol is referred to by using a notation of the form @@name, where &ldquo;name&rdquo; is one of the values listed in <emu-xref href="#table-1"></emu-xref>.</p>
+    <emu-table id="table-1" caption="Well-known Symbols">
+      <table>
+        <tbody>
+        <tr>
+          <th>
+            Specification Name
+          </th>
+          <th>
+            [[Description]]
+          </th>
+          <th>
+            Value and Purpose
+          </th>
+        </tr>
+        <tr>
+          <td>
+            @@asyncIterator
+          </td>
+          <td>
+            `"Symbol.asyncIterator"`
+          </td>
+          <td>
+            A method that returns the default AsyncIterator for an object. Called by the semantics of the `for`-`await`-`of` statement.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            @@hasInstance
+          </td>
+          <td>
+            `"Symbol.hasInstance"`
+          </td>
+          <td>
+            A method that determines if a constructor object recognizes an object as one of the constructor's instances. Called by the semantics of the `instanceof` operator.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            @@isConcatSpreadable
+          </td>
+          <td>
+            `"Symbol.isConcatSpreadable"`
+          </td>
+          <td>
+            A Boolean valued property that if true indicates that an object should be flattened to its array elements by <emu-xref href="#sec-array.prototype.concat">`Array.prototype.concat`</emu-xref>.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            @@iterator
+          </td>
+          <td>
+            `"Symbol.iterator"`
+          </td>
+          <td>
+            A method that returns the default Iterator for an object. Called by the semantics of the for-of statement.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            @@match
+          </td>
+          <td>
+            `"Symbol.match"`
+          </td>
+          <td>
+            A regular expression method that matches the regular expression against a string. Called by the <emu-xref href="#sec-string.prototype.match">`String.prototype.match`</emu-xref> method.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            @@replace
+          </td>
+          <td>
+            `"Symbol.replace"`
+          </td>
+          <td>
+            A regular expression method that replaces matched substrings of a string. Called by the <emu-xref href="#sec-string.prototype.replace">`String.prototype.replace`</emu-xref> method.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            @@search
+          </td>
+          <td>
+            `"Symbol.search"`
+          </td>
+          <td>
+            A regular expression method that returns the index within a string that matches the regular expression. Called by the <emu-xref href="#sec-string.prototype.search">`String.prototype.search`</emu-xref> method.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <ins>@@thenable</ins>
+          </td>
+          <td>
+            <ins>`"Symbol.thenable"`</ins>
+          </td>
+          <td>
+            <ins>A boolean valued property whose value controls whether the associated object will be considered "thenable."</ins>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            @@species
+          </td>
+          <td>
+            `"Symbol.species"`
+          </td>
+          <td>
+            A function valued property that is the constructor function that is used to create derived objects.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            @@split
+          </td>
+          <td>
+            `"Symbol.split"`
+          </td>
+          <td>
+            A regular expression method that splits a string at the indices that match the regular expression. Called by the <emu-xref href="#sec-string.prototype.split">`String.prototype.split`</emu-xref> method.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            @@toPrimitive
+          </td>
+          <td>
+            `"Symbol.toPrimitive"`
+          </td>
+          <td>
+            A method that converts an object to a corresponding primitive value. Called by the ToPrimitive abstract operation.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            @@toStringTag
+          </td>
+          <td>
+            `"Symbol.toStringTag"`
+          </td>
+          <td>
+            A String valued property that is used in the creation of the default string description of an object. Accessed by the built-in method <emu-xref href="#sec-object.prototype.tostring">`Object.prototype.toString`</emu-xref>.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            @@unscopables
+          </td>
+          <td>
+            `"Symbol.unscopables"`
+          </td>
+          <td>
+            An object valued property whose own and inherited property names are property names that are excluded from the `with` environment bindings of the associated object.
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </emu-table>
+  </emu-clause>
+</emu-clause>
+
+<!-- es6num="25.4.1" -->
+<emu-clause id="sec-promise-abstract-operations">
+  <h1>Promise Abstract Operations</h1>
+
+  <!-- es6num="25.4.1.3.2" -->
+  <emu-clause id="sec-promise-resolve-functions">
+    <h1>Promise Resolve Functions</h1>
+    <p>A promise resolve function is an anonymous built-in function that has [[Promise]] and [[AlreadyResolved]] internal slots.</p>
+    <p>When a promise resolve function _F_ is called with argument _resolution_, the following steps are taken:</p>
+    <emu-alg>
+      1. Assert: _F_ has a [[Promise]] internal slot whose value is an Object.
+      1. Let _promise_ be _F_.[[Promise]].
+      1. Let _alreadyResolved_ be _F_.[[AlreadyResolved]].
+      1. If _alreadyResolved_.[[Value]] is *true*, return *undefined*.
+      1. Set _alreadyResolved_.[[Value]] to *true*.
+      1. If SameValue(_resolution_, _promise_) is *true*, then
+        1. Let _selfResolutionError_ be a newly created *TypeError* object.
+        1. Return RejectPromise(_promise_, _selfResolutionError_).
+      1. If Type(_resolution_) is not Object, then
+        1. Return FulfillPromise(_promise_, _resolution_).
+      1. <ins>Let _thenable_ be Get(_resolution_, @@thenable)</ins>
+      1. <ins>If _thenable_ is *false*, then</ins>
+        1. <ins>Return FulfillPromise(_promise_, _resolution_).</ins>
+      1. Let _then_ be Get(_resolution_, `"then"`).
+      1. If _then_ is an abrupt completion, then
+        1. Return RejectPromise(_promise_, _then_.[[Value]]).
+      1. Let _thenAction_ be _then_.[[Value]].
+      1. If IsCallable(_thenAction_) is *false*, then
+        1. Return FulfillPromise(_promise_, _resolution_).
+      1. Perform EnqueueJob(`"PromiseJobs"`, PromiseResolveThenableJob, &laquo; _promise_, _resolution_, _thenAction_ &raquo;).
+      1. Return *undefined*.
+    </emu-alg>
+    <p>The `length` property of a promise resolve function is 1.</p>
+  </emu-clause>
+</emu-clause>
 
 
+<emu-clause id="sec-reflection">
+  <h1>Reflection</h1>
   <!-- es6num="26.3" -->
   <emu-clause id="sec-module-namespace-objects">
     <h1>Module Namespace Objects</h1>
@@ -237,3 +272,5 @@ contributors: Gus Caplan
       <p><ins>This property has the attributes { [[Writable]]: *false*, [[Enumerable]]: *false*, [[Configurable]]: *false* }.</ins></p>
     </emu-clause>
   </emu-clause>
+</emu-clause>
+
