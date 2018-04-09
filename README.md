@@ -14,7 +14,8 @@ it.
 This is especially true with dynamic import, which will become part of the
 language spec very soon. There has been a lot of discussion around how an
 import declaration and a dynamic import, because of "thenables," may have
-different namespaces passed to a user. __This is absolutely crazy.__
+different things passed to a user which won't even be actual namespaces.
+__This is absolutely crazy.__
 
 The natural conclusion of this is to add some sort of modifier to an object
 such that `Promise.resolve` is aware that it should not perform "thenable"
@@ -37,14 +38,14 @@ Object in `Promise.resolve`, however there was resistance to this, as it might
 not be entirely intuitive why this object was being treated differently.
 `Symbol.thenable` provides clear explanation for that.
 
-### Alternatives
+### Alternatives and Options
 
-Mount symbol on `Promise` namespace (`Promise.thenable`)
+- Mount symbol on `Promise` namespace (`Promise.thenable`)
 
 
-Whitelist Module Namespace Object
+- Whitelist specific objects we don't want to treat as "thenables":\
 
-```
-1. If _resolution_ is a Module Namespace Object, then
-  1. Return FulfullPromise(_promise_, _resolution_).
-```
+  ```
+  1. If _resolution_ is a Module Namespace Object, then
+      1. Return FulfullPromise(_promise_, _resolution_).
+  ```
