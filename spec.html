@@ -202,9 +202,9 @@ contributors: Gus Caplan
           1. If Type(_resolution_) is not Object, then
             1. Return FulfillPromise(_promise_, _resolution_).
           1. <ins>Let _thenable_ be Get(_resolution_, @@thenable)</ins>
-          1. <ins>If _thenable_ is not *false*, then</ins>
-            1. <ins>Let _then_ be Get(_resolution_, `"then"`).</ins>
-          1. <del>Let _then_ be Get(_resolution_, `"then"`).</del>
+          1. <ins>If _thenable_ is *false*, then</ins>
+            1. <ins>Return FulfillPromise(_promise_, _resolution_).</ins>
+          1. Let _then_ be Get(_resolution_, `"then"`).
           1. If _then_ is an abrupt completion, then
             1. Return RejectPromise(_promise_, _then_.[[Value]]).
           1. Let _thenAction_ be _then_.[[Value]].

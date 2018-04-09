@@ -1,6 +1,8 @@
 # Symbol.thenable
 
-Gus Caplan, Stage 0
+Gus Caplan, Stage -1
+
+Champion Needed
 
 ### Why
 
@@ -27,4 +29,22 @@ Promise.resolve({
 }).then((o) => {
   o.then() === 'a time that isn\'t now';
 });
+```
+
+This came from trying to think of the most generalised solution to this
+problem. Alternatives could be explicitly blacklisting a Module Namespace
+Object in `Promise.resolve`, however there was resistance to this, as it might
+not be entirely intuitive why this object was being treated differently.
+`Symbol.thenable` provides clear explanation for that.
+
+### Alternatives
+
+Mount symbol on `Promise` namespace (`Promise.thenable`)
+
+
+Whitelist Module Namespace Object
+
+```
+1. If _resolution_ is a Module Namespace Object, then
+  1. Return FulfullPromise(_promise_, _resolution_).
 ```
