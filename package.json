@@ -1,0 +1,11 @@
+{
+  "name": "proposal-symbol-thenable",
+  "dependencies": {},
+  "devDependencies": {
+    "ecmarkup": "^3.13.0"
+  },
+  "scripts": {
+    "build": "ecmarkup spec.html out/index.html --js out/ecmarkup.js --css out/ecmarkup.css",
+    "watch": "ecmarkup --watch spec.html out/index.html --js out/ecmarkup.js --css out/ecmarkup.css"
+  }
+}
