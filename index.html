@@ -1,0 +1,252 @@
+<!doctype html>
+<head><meta charset="utf-8"><title>Symbol.thenable</title><script type="application/json" id="menu-search-biblio">[{"type":"table","id":"table-1","number":1,"caption":"Table 1: Well-known Symbols","referencingIds":["_ref_0"],"namespace":"https://gus.host/proposal-import-meta/","location":"","key":"Table 1: Well-known Symbols"},{"type":"clause","id":"sec-well-known-symbols","aoid":null,"title":"Well-Known Symbols","titleHTML":"Well-Known Symbols","number":"1.1","namespace":"https://gus.host/proposal-import-meta/","location":"","referencingIds":[],"key":"Well-Known Symbols"},{"type":"clause","id":"sec-ecmascript-language-types-symbol-type","aoid":null,"title":"The Symbol Type","titleHTML":"The Symbol Type","number":"1","namespace":"https://gus.host/proposal-import-meta/","location":"","referencingIds":[],"key":"The Symbol Type"},{"type":"clause","id":"sec-promise-resolve-functions","aoid":null,"title":"Promise Resolve Functions","titleHTML":"Promise Resolve Functions","number":"2.1","namespace":"https://gus.host/proposal-import-meta/","location":"","referencingIds":[],"key":"Promise Resolve Functions"},{"type":"clause","id":"sec-promise-abstract-operations","aoid":null,"title":"Promise Abstract Operations","titleHTML":"Promise Abstract Operations","number":"2","namespace":"https://gus.host/proposal-import-meta/","location":"","referencingIds":[],"key":"Promise Abstract Operations"},{"type":"clause","id":"sec-@@tostringtag","aoid":null,"title":"@@toStringTag","titleHTML":"@@toStringTag","number":"3.1","namespace":"https://gus.host/proposal-import-meta/","location":"","referencingIds":[],"key":"@@toStringTag"},{"type":"clause","id":"sec-@@thenable","aoid":null,"title":"@@thenable","titleHTML":"<ins>@@thenable</ins>","number":"3.2","namespace":"https://gus.host/proposal-import-meta/","location":"","referencingIds":[],"key":"@@thenable"},{"type":"clause","id":"sec-module-namespace-objects","aoid":null,"title":"Module Namespace Objects","titleHTML":"Module Namespace Objects","number":"3","namespace":"https://gus.host/proposal-import-meta/","location":"","referencingIds":[],"key":"Module Namespace Objects"}]</script></head><body><div id="menu-toggle">☰</div><div id="menu-spacer"></div><div id="menu"><div id="menu-search"><input type="text" id="menu-search-box" placeholder="Search..."><div id="menu-search-results" class="inactive"></div></div><div id="menu-pins"><div class="menu-pane-header">Pins</div><ul id="menu-pins-list"></ul></div><div class="menu-pane-header">Table of Contents</div><div id="menu-toc"><ol class="toc"><li><span class="item-toggle">◢</span><a href="#sec-ecmascript-language-types-symbol-type" title="The Symbol Type"><span class="secnum">1</span> The Symbol Type</a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#sec-well-known-symbols" title="Well-Known Symbols"><span class="secnum">1.1</span> Well-Known Symbols</a></li></ol></li><li><span class="item-toggle">◢</span><a href="#sec-promise-abstract-operations" title="Promise Abstract Operations"><span class="secnum">2</span> Promise Abstract Operations</a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#sec-promise-resolve-functions" title="Promise Resolve Functions"><span class="secnum">2.1</span> Promise Resolve Functions</a></li></ol></li><li><span class="item-toggle">◢</span><a href="#sec-module-namespace-objects" title="Module Namespace Objects"><span class="secnum">3</span> Module Namespace Objects</a><ol class="toc"><li><span class="item-toggle-none"></span><a href="#sec-@@tostringtag" title="@@toStringTag"><span class="secnum">3.1</span> @@toStringTag</a></li><li><span class="item-toggle-none"></span><a href="#sec-@@thenable" title="@@thenable"><span class="secnum">3.2</span> <ins>@@thenable</ins></a></li></ol></li></ol></div></div><div id="spec-container"><h1 class="version first">Stage 0 Draft / April 9, 2018</h1><h1 class="title">Symbol.thenable</h1>
+<script src="ecmarkup.js" defer=""></script>
+<link rel="stylesheet" href="ecmarkup.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+
+    <!-- es6num="6.1.5" -->
+    <emu-clause id="sec-ecmascript-language-types-symbol-type">
+      <h1><span class="secnum">1</span>The Symbol Type</h1>
+      <!-- es6num="6.1.5.1" -->
+      <emu-clause id="sec-well-known-symbols">
+        <h1><span class="secnum">1.1</span>Well-Known Symbols</h1>
+        <p>Well-known symbols are built-in Symbol values that are explicitly referenced by algorithms of this specification. They are typically used as the keys of properties whose values serve as extension points of a specification algorithm. Unless otherwise specified, well-known symbols values are shared by all realms (<emu-xref href="#sec-code-realms"><a href="https://tc39.github.io/ecma262/#sec-code-realms">8.2</a></emu-xref>).</p>
+        <p>Within this specification a well-known symbol is referred to by using a notation of the form @@name, where “name” is one of the values listed in  <emu-xref href="#table-1" id="_ref_0"><a href="#table-1">Table 1</a></emu-xref>.</p>
+        <emu-table id="table-1" caption="Well-known Symbols"><figure><figcaption>Table 1: Well-known Symbols</figcaption>
+          <table>
+            <tbody>
+            <tr>
+              <th>
+                Specification Name
+              
+              </th>
+              <th>
+                [[Description]]
+              
+              </th>
+              <th>
+                Value and Purpose
+              
+              </th>
+            </tr>
+            <tr>
+              <td>
+                @@asyncIterator
+              
+              </td>
+              <td>
+                <code>"Symbol.asyncIterator"</code>
+              
+              </td>
+              <td>
+                A method that returns the default AsyncIterator for an object. Called by the semantics of the <code>for</code>-<code>await</code>-<code>of</code> statement.
+              
+              </td>
+            </tr>
+            <tr>
+              <td>
+                @@hasInstance
+              
+              </td>
+              <td>
+                <code>"Symbol.hasInstance"</code>
+              
+              </td>
+              <td>
+                A method that determines if a constructor object recognizes an object as one of the constructor's instances. Called by the semantics of the <code>instanceof</code> operator.
+              
+              </td>
+            </tr>
+            <tr>
+              <td>
+                @@isConcatSpreadable
+              
+              </td>
+              <td>
+                <code>"Symbol.isConcatSpreadable"</code>
+              
+              </td>
+              <td>
+                A Boolean valued property that if true indicates that an object should be flattened to its array elements by  <emu-xref href="#sec-array.prototype.concat"><a href="https://tc39.github.io/ecma262/#sec-array.prototype.concat"><code>Array.prototype.concat</code></a></emu-xref>.
+              
+              </td>
+            </tr>
+            <tr>
+              <td>
+                @@iterator
+              
+              </td>
+              <td>
+                <code>"Symbol.iterator"</code>
+              
+              </td>
+              <td>
+                A method that returns the default Iterator for an object. Called by the semantics of the for-of statement.
+              
+              </td>
+            </tr>
+            <tr>
+              <td>
+                @@match
+              
+              </td>
+              <td>
+                <code>"Symbol.match"</code>
+              
+              </td>
+              <td>
+                A regular expression method that matches the regular expression against a string. Called by the  <emu-xref href="#sec-string.prototype.match"><a href="https://tc39.github.io/ecma262/#sec-string.prototype.match"><code>String.prototype.match</code></a></emu-xref> method.
+              
+              </td>
+            </tr>
+            <tr>
+              <td>
+                @@replace
+              
+              </td>
+              <td>
+                <code>"Symbol.replace"</code>
+              
+              </td>
+              <td>
+                A regular expression method that replaces matched substrings of a string. Called by the  <emu-xref href="#sec-string.prototype.replace"><a href="https://tc39.github.io/ecma262/#sec-string.prototype.replace"><code>String.prototype.replace</code></a></emu-xref> method.
+              
+              </td>
+            </tr>
+            <tr>
+              <td>
+                @@search
+              
+              </td>
+              <td>
+                <code>"Symbol.search"</code>
+              
+              </td>
+              <td>
+                A regular expression method that returns the index within a string that matches the regular expression. Called by the  <emu-xref href="#sec-string.prototype.search"><a href="https://tc39.github.io/ecma262/#sec-string.prototype.search"><code>String.prototype.search</code></a></emu-xref> method.
+              
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <ins>@@thenable</ins>
+              </td>
+              <td>
+                <ins><code>"Symbol.thenable"</code></ins>
+              </td>
+              <td>
+                <ins>A boolean valued property whose value controls whether the associated object will be considered "thenable."</ins>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                @@species
+              
+              </td>
+              <td>
+                <code>"Symbol.species"</code>
+              
+              </td>
+              <td>
+                A function valued property that is the constructor function that is used to create derived objects.
+              
+              </td>
+            </tr>
+            <tr>
+              <td>
+                @@split
+              
+              </td>
+              <td>
+                <code>"Symbol.split"</code>
+              
+              </td>
+              <td>
+                A regular expression method that splits a string at the indices that match the regular expression. Called by the  <emu-xref href="#sec-string.prototype.split"><a href="https://tc39.github.io/ecma262/#sec-string.prototype.split"><code>String.prototype.split</code></a></emu-xref> method.
+              
+              </td>
+            </tr>
+            <tr>
+              <td>
+                @@toPrimitive
+              
+              </td>
+              <td>
+                <code>"Symbol.toPrimitive"</code>
+              
+              </td>
+              <td>
+                A method that converts an object to a corresponding primitive value. Called by the <emu-xref aoid="ToPrimitive" id="_ref_1"><a href="https://tc39.github.io/ecma262/#sec-toprimitive">ToPrimitive</a></emu-xref> abstract operation.
+              
+              </td>
+            </tr>
+            <tr>
+              <td>
+                @@toStringTag
+              
+              </td>
+              <td>
+                <code>"Symbol.toStringTag"</code>
+              
+              </td>
+              <td>
+                A String valued property that is used in the creation of the default string description of an object. Accessed by the built-in method  <emu-xref href="#sec-object.prototype.tostring"><a href="https://tc39.github.io/ecma262/#sec-object.prototype.tostring"><code>Object.prototype.toString</code></a></emu-xref>.
+              
+              </td>
+            </tr>
+            <tr>
+              <td>
+                @@unscopables
+              
+              </td>
+              <td>
+                <code>"Symbol.unscopables"</code>
+              
+              </td>
+              <td>
+                An object valued property whose own and inherited property names are property names that are excluded from the <code>with</code> environment bindings of the associated object.
+              
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </figure></emu-table>
+      </emu-clause>
+    </emu-clause>
+
+    <!-- es6num="25.4.1" -->
+    <emu-clause id="sec-promise-abstract-operations">
+      <h1><span class="secnum">2</span>Promise Abstract Operations</h1>
+
+      <!-- es6num="25.4.1.3.2" -->
+      <emu-clause id="sec-promise-resolve-functions">
+        <h1><span class="secnum">2.1</span>Promise Resolve Functions</h1>
+        <p>A promise resolve function is an anonymous built-in function that has [[Promise]] and [[AlreadyResolved]] internal slots.</p>
+        <p>When a promise resolve function <var>F</var> is called with argument <var>resolution</var>, the following steps are taken:</p>
+        <emu-alg><ol><li>Assert: <var>F</var> has a [[Promise]] internal slot whose value is an Object.</li><li>Let <var>promise</var> be <var>F</var>.[[Promise]].</li><li>Let <var>alreadyResolved</var> be <var>F</var>.[[AlreadyResolved]].</li><li>If <var>alreadyResolved</var>.[[Value]] is <emu-val>true</emu-val>, return <emu-val>undefined</emu-val>.</li><li>Set <var>alreadyResolved</var>.[[Value]] to <emu-val>true</emu-val>.</li><li>If <emu-xref aoid="SameValue" id="_ref_2"><a href="https://tc39.github.io/ecma262/#sec-samevalue">SameValue</a></emu-xref>(<var>resolution</var>, <var>promise</var>) is <emu-val>true</emu-val>, then<ol><li>Let <var>selfResolutionError</var> be a newly created <emu-val>TypeError</emu-val> object.</li><li>Return <emu-xref aoid="RejectPromise" id="_ref_3"><a href="https://tc39.github.io/ecma262/#sec-rejectpromise">RejectPromise</a></emu-xref>(<var>promise</var>, <var>selfResolutionError</var>).</li></ol></li><li>If <emu-xref aoid="Type" id="_ref_4"><a href="https://tc39.github.io/ecma262/#sec-ecmascript-data-types-and-values">Type</a></emu-xref>(<var>resolution</var>) is not Object, then<ol><li>Return <emu-xref aoid="FulfillPromise" id="_ref_5"><a href="https://tc39.github.io/ecma262/#sec-fulfillpromise">FulfillPromise</a></emu-xref>(<var>promise</var>, <var>resolution</var>).</li></ol></li><li><ins>Let <var>thenable</var> be <emu-xref aoid="Get" id="_ref_6"><a href="https://tc39.github.io/ecma262/#sec-get-o-p">Get</a></emu-xref>(<var>resolution</var>, @@thenable)</ins></li><li><ins>If <var>thenable</var> is <emu-val>false</emu-val>, then</ins><ol><li><ins>Return <emu-xref aoid="FulfillPromise" id="_ref_7"><a href="https://tc39.github.io/ecma262/#sec-fulfillpromise">FulfillPromise</a></emu-xref>(<var>promise</var>, <var>resolution</var>).</ins></li></ol></li><li>Let <var>then</var> be <emu-xref aoid="Get" id="_ref_8"><a href="https://tc39.github.io/ecma262/#sec-get-o-p">Get</a></emu-xref>(<var>resolution</var>, <code>"then"</code>).</li><li>If <var>then</var> is an <emu-xref href="#sec-completion-record-specification-type"><a href="https://tc39.github.io/ecma262/#sec-completion-record-specification-type">abrupt completion</a></emu-xref>, then<ol><li>Return <emu-xref aoid="RejectPromise" id="_ref_9"><a href="https://tc39.github.io/ecma262/#sec-rejectpromise">RejectPromise</a></emu-xref>(<var>promise</var>, <var>then</var>.[[Value]]).</li></ol></li><li>Let <var>thenAction</var> be <var>then</var>.[[Value]].</li><li>If <emu-xref aoid="IsCallable" id="_ref_10"><a href="https://tc39.github.io/ecma262/#sec-iscallable">IsCallable</a></emu-xref>(<var>thenAction</var>) is <emu-val>false</emu-val>, then<ol><li>Return <emu-xref aoid="FulfillPromise" id="_ref_11"><a href="https://tc39.github.io/ecma262/#sec-fulfillpromise">FulfillPromise</a></emu-xref>(<var>promise</var>, <var>resolution</var>).</li></ol></li><li>Perform <emu-xref aoid="EnqueueJob" id="_ref_12"><a href="https://tc39.github.io/ecma262/#sec-enqueuejob">EnqueueJob</a></emu-xref>(<code>"PromiseJobs"</code>, <emu-xref aoid="PromiseResolveThenableJob" id="_ref_13"><a href="https://tc39.github.io/ecma262/#sec-promiseresolvethenablejob">PromiseResolveThenableJob</a></emu-xref>, « <var>promise</var>, <var>resolution</var>, <var>thenAction</var> »).</li><li>Return <emu-val>undefined</emu-val>.
+        </li></ol></emu-alg>
+        <p>The <code>length</code> property of a promise resolve function is 1.</p>
+      </emu-clause>
+   </emu-clause>
+
+
+  <!-- es6num="26.3" -->
+  <emu-clause id="sec-module-namespace-objects">
+    <h1><span class="secnum">3</span>Module Namespace Objects</h1>
+    <p>A Module Namespace Object is a module namespace exotic object that provides runtime property-based access to a module's exported bindings. There is no constructor function for Module Namespace Objects. Instead, such an object is created for each module that is imported by an <emu-nt><a href="https://tc39.github.io/ecma262/#prod-ImportDeclaration">ImportDeclaration</a></emu-nt> that includes a <emu-nt><a href="https://tc39.github.io/ecma262/#prod-NameSpaceImport">NameSpaceImport</a></emu-nt>.</p>
+    <p>In addition to the properties specified in  <emu-xref href="#sec-module-namespace-exotic-objects"><a href="https://tc39.github.io/ecma262/#sec-module-namespace-exotic-objects">9.4.6</a></emu-xref> each Module Namespace Object has the following own  <del>property</del><ins>properties</ins>:</p>
+
+    <!-- es6num="26.3.1" -->
+    <emu-clause id="sec-@@tostringtag">
+      <h1><span class="secnum">3.1</span>@@toStringTag</h1>
+      <p>The initial value of the @@toStringTag property is the String value <code>"Module"</code>.</p>
+      <p>This property has the attributes { [[Writable]]: <emu-val>false</emu-val>, [[Enumerable]]: <emu-val>false</emu-val>, [[Configurable]]: <emu-val>false</emu-val> }.</p>
+    </emu-clause>
+
+    <ins><emu-clause id="sec-@@thenable">
+      <h1><span class="secnum">3.2</span><ins>@@thenable</ins></h1>
+      <p><ins>The initial value of the @@thenable property is the Boolean value <emu-val>false</emu-val>.</ins></p>
+      <p><ins>This property has the attributes { [[Writable]]: <emu-val>false</emu-val>, [[Enumerable]]: <emu-val>false</emu-val>, [[Configurable]]: <emu-val>false</emu-val> }.</ins></p>
+    </emu-clause></ins>
+  </emu-clause>
+</div></body>
