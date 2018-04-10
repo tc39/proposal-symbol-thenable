@@ -40,6 +40,8 @@ not be entirely intuitive why this object was being treated differently.
 
 ### Alternatives and Options
 
+- [First-Class Protocols Proposal][]
+
 - Mount symbol on `Promise` namespace (`Promise.thenable`)
 
 
@@ -47,5 +49,7 @@ not be entirely intuitive why this object was being treated differently.
 
   ```
   1. If _resolution_ is a Module Namespace Object, then
-      1. Return FulfullPromise(_promise_, _resolution_).
+    1. Return FulfullPromise(_promise_, _resolution_).
   ```
+
+[First-Class Protocols Proposal]: https://github.com/michaelficarra/proposal-first-class-protocols
