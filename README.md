@@ -38,14 +38,15 @@ Object in `Promise.resolve`, however there was resistance to this, as it might
 not be entirely intuitive why this object was being treated differently.
 `Symbol.thenable` provides clear explanation for that.
 
-### Alternatives and Options
+In the future, this symbol can also be used by a protocol (see the
+[First-Class Protocols Proposal][]) along the lines of `Promise.Thenable` as a
+sort of "disabled" symbol.
 
-- [First-Class Protocols Proposal][]
+### Alternatives and Options
 
 - Mount symbol on `Promise` namespace (`Promise.thenable`)
 
-
-- Whitelist specific objects we don't want to treat as "thenables":\
+- Whitelist specific objects we don't want to treat as "thenables":
 
   ```
   1. If _resolution_ is a Module Namespace Object, then
