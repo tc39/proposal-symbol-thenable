@@ -12,12 +12,12 @@ Promise implementation protocols, and in most cases does not result in any
 issues, but there remain scenarios where it is unwanted.
 
 This is especially true with dynamic import of module namespace objects,
-which will become part of the language spec very soon. There has been a
-lot of discussion around how an import declaration and a dynamic import
-(such as https://github.com/tc39/proposal-dynamic-import/issues/47,
-https://github.com/tc39/proposal-dynamic-import/issues/48),
-because a namespace might be interpreted as a "thenable" resulting in
-a non-namespace return from `import()` - which may be very unexpected.
+which will become part of the language spec very soon. A namespace might
+be interpreted as a "thenable" resulting in a non-namespace return from
+`import()` - which may be very unexpected. There has been a lot of 
+previous discussion around these scenarios including at
+https://github.com/tc39/proposal-dynamic-import/issues/47 and
+https://github.com/tc39/proposal-dynamic-import/issues/48.
 
 ### Proposal
 
@@ -37,6 +37,8 @@ Promise.resolve({
 ```
 
 In addition this symbol would be set by default on Module Namespace objects.
+While users can already `import *` a namespace object and return it through a
+promise resolution, this can still be considered an incredibly rare case today.
 
 This came from trying to think of the most generalised solution to this
 problem. Alternatives could include explicitly blacklisting a Module Namespace
