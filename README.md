@@ -1,8 +1,10 @@
 # Symbol.thenable
 
-Gus Caplan, Stage -1
+Champions: Myles Borins, Jordan Harband
 
-Champion Needed
+Author: Gus Caplan
+
+Stage 0
 
 ### Why
 
@@ -18,6 +20,17 @@ be interpreted as a "thenable" resulting in a non-namespace return from
 previous discussion around these scenarios, including
 https://github.com/tc39/proposal-dynamic-import/issues/47 and
 https://github.com/tc39/proposal-dynamic-import/issues/48.
+
+```js
+import static from 'X'
+
+import('X').then((dynamic) => {
+  assert(static === dyanmic); // might be false, /hopefully/ the consumer of X
+                              // and the author of X are both aware of this
+                              // behaviour (and if they are, no one exploits
+                              // it to do confusing things)
+});
+```
 
 ### Proposal
 
