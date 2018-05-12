@@ -25,7 +25,7 @@ https://github.com/tc39/proposal-dynamic-import/issues/48.
 import static from 'X'
 
 import('X').then((dynamic) => {
-  assert(static === dyanmic); // might be false, /hopefully/ the consumer of X
+  assert(static === dynamic); // might be false, /hopefully/ the consumer of X
                               // and the author of X are both aware of this
                               // behaviour (and if they are, no one exploits
                               // it to do confusing things)
