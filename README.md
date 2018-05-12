@@ -22,7 +22,7 @@ https://github.com/tc39/proposal-dynamic-import/issues/47 and
 https://github.com/tc39/proposal-dynamic-import/issues/48.
 
 ```js
-import static from 'X'
+import * as static from 'X'
 
 import('X').then((dynamic) => {
   assert(static === dynamic); // might be false, /hopefully/ the consumer of X
